@@ -1,0 +1,50 @@
+plugins {
+    id("groovy")
+    id("io.micronaut.application") version "1.2.0"
+    id("com.google.cloud.tools.jib") version "2.6.0"
+}
+
+version = "0.1"
+group = "ale.tony"
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://oss.jfrog.org/oss-snapshot-local" }
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("ale.tony.*")
+    }
+}
+
+dependencies {
+    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.groovy:micronaut-runtime-groovy")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-management")
+    implementation("io.micronaut.kubernetes:micronaut-kubernetes-discovery-client")
+    runtimeOnly("ch.qos.logback:logback-classic")
+}
+
+
+application {
+    mainClass.set("ale.tony.Application")
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion("1.8")
+    targetCompatibility = JavaVersion.toVersion("1.8")
+}
+
+
+
+    jib {
+        to {
+            image = "gcr.io/myapp/jib-image"
+        }
+    }

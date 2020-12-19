@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: ale.tony
+testFramework: junit
+sourceLanguage: groovy
+buildTool: gradle
+features: [app-name, config-kubernetes, gradle, groovy, groovy-application, http-client, jib, junit, kubernetes, logback, management, netty-server, readme, yaml]
